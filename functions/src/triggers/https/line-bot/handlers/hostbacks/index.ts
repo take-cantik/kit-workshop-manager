@@ -2,11 +2,27 @@ import { PostbackEvent, TextMessage } from '@line/bot-sdk'
 import { lineClient } from '~/utils/line'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
-  // test postback
-  const message: TextMessage = {
+  const replyMessage: TextMessage = {
     type: 'text',
-    text: event.postback.data
+    text: ''
   }
 
-  await lineClient.replyMessage(event.replyToken, message)
+  const group = ['プログラミング研究会', 'KEPRA', 'KITCATS', 'DEAGLE', '自然科学部', '寮tech', 'その他']
+  const answer = ['はい', 'いいえ']
+
+  if (group.includes(event.postback.data)) {
+    // ユーザー追加
+    replyMessage.text = `${event.postback.data}で登録しました`
+  }
+
+  if (answer.includes(event.postback.data)) {
+    if (event.postback.data === 'はい') {
+      // 工房の追加
+      replyMessage.text = '登録しました'
+    } else {
+      replyMessage.text = 'わかりました'
+    }
+  }
+
+  await lineClient.replyMessage(event.replyToken, replyMessage)
 }
