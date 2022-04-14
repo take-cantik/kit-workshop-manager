@@ -44,18 +44,23 @@ export const msgJoin: FlexMessage = {
         {
           type: 'button',
           action: {
-            type: 'message',
+            type: 'postback',
             label: 'はい',
-            text: 'はい'
+            data: 'はい',
+            displayText: 'はい'
           },
           color: '#004C6D'
         },
         {
+          type: 'separator'
+        },
+        {
           type: 'button',
           action: {
-            type: 'message',
+            type: 'postback',
             label: 'いいえ',
-            text: 'いいえ'
+            data: 'いいえ',
+            displayText: 'いいえ'
           },
           color: '#D93535'
         }
