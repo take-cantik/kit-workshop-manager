@@ -9,7 +9,7 @@
 //   FIREBASE_APP_ID
 // } from '~/utils/secrets'
 import admin from 'firebase-admin'
-import { FIREBASE_DETABASE_URL } from '~/utils/secrets'
+import { FIREBASE_DATABASE_URL } from '~/utils/secrets'
 
 // export const firebaseConfig: FirebaseOptions = {
 //   apiKey: FIREBASE_API_KEY,
@@ -23,5 +23,5 @@ import { FIREBASE_DETABASE_URL } from '~/utils/secrets'
 
 export const firebaseAdminOptions: admin.AppOptions = {
   credential: admin.credential.applicationDefault(),
-  databaseURL: FIREBASE_DETABASE_URL
+  databaseURL: FIREBASE_DATABASE_URL
 }
