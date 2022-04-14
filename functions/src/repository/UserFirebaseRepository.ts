@@ -7,8 +7,8 @@ export interface User {
   group: string
 }
 
-export const useUser = () => {
-  const getUser = async (lineId: string) => {
+export class UserFirebaseRepository {
+  async getUser(lineId: string) {
     try {
       const user = await db.collection('users').where('lineId', '==', lineId).get()
       return user.docs[0]
@@ -18,17 +18,12 @@ export const useUser = () => {
     }
   }
 
-  const addUser = async (user: User) => {
+  async addUser(user: User) {
     try {
       await db.collection('users').add(user)
     } catch (err) {
       errorLogger(err)
       throw new Error('addUser')
     }
-  }
-
-  return {
-    getUser,
-    addUser
   }
 }
