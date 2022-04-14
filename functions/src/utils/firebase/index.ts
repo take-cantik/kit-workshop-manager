@@ -1,7 +1,8 @@
 import admin from 'firebase-admin'
+import { firebaseAdminOptions } from './config'
 
 if (admin.apps.length === 0) {
-  admin.initializeApp()
+  admin.initializeApp(firebaseAdminOptions)
 }
 
 // Auth
