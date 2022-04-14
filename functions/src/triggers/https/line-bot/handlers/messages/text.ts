@@ -10,7 +10,13 @@ export const messageTextHandler = async (event: MessageEvent): Promise<void> => 
   try {
     const { text } = event.message as TextEventMessage
 
-    await lineClient.replyMessage(event.replyToken, makeReplyMessage(text))
+    let test = text
+
+    if (text === 'ahi') {
+      test = 'マジ卍'
+    }
+
+    await lineClient.replyMessage(event.replyToken, makeReplyMessage(test))
   } catch (err) {
     errorLogger(err)
     throw new Error('message text handler')
