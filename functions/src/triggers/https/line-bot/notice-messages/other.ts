@@ -19,9 +19,12 @@ export const msgError: FlexMessage = {
           type: 'text',
           text: 'エラーが発生しました',
           align: 'start',
-          wrap: true
+          wrap: true,
+          size: 'lg',
+          weight: 'bold'
         }
-      ]
+      ],
+      paddingAll: 'xxl'
     },
     footer: {
       type: 'box',
@@ -32,9 +35,11 @@ export const msgError: FlexMessage = {
           action: {
             type: 'uri',
             label: '報告する',
-            uri: 'https://twitter.com/hyodoblog'
+            uri: 'https://twitter.com/take_cantik'
           },
-          style: 'primary'
+          style: 'primary',
+          color: '#D93535',
+          height: 'sm'
         }
       ]
     }
