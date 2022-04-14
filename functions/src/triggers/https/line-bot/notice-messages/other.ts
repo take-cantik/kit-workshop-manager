@@ -1,4 +1,5 @@
 import { FlexMessage, TextMessage } from '@line/bot-sdk'
+import { MY_LINE_LINK } from '~/utils/secrets'
 
 export const msgOther: TextMessage = {
   type: 'text',
@@ -35,7 +36,7 @@ export const msgError: FlexMessage = {
           action: {
             type: 'uri',
             label: '報告する',
-            uri: 'https://twitter.com/take_cantik'
+            uri: MY_LINE_LINK
           },
           style: 'primary',
           color: '#D93535',
