@@ -1,5 +1,6 @@
 import { PostbackEvent, TextMessage } from '@line/bot-sdk'
 import { lineClient } from '~/utils/line'
+import { groupHandler } from './group'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   const replyMessage: TextMessage = {
@@ -11,8 +12,7 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   const answer = ['はい', 'いいえ']
 
   if (group.includes(event.postback.data)) {
-    // ユーザー追加
-    replyMessage.text = `${event.postback.data}で登録しました`
+    groupHandler(event)
   }
 
   if (answer.includes(event.postback.data)) {
@@ -22,7 +22,6 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
     } else {
       replyMessage.text = 'わかりました'
     }
+    await lineClient.replyMessage(event.replyToken, replyMessage)
   }
-
-  await lineClient.replyMessage(event.replyToken, replyMessage)
 }
