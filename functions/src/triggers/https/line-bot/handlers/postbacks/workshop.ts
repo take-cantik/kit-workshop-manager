@@ -9,13 +9,26 @@ export const workshopHandler = async (event: PostbackEvent): Promise<void> => {
     const groupId = event.source.groupId
     const group = await lineClient.getGroupSummary(groupId)
 
-    await repository.setWorkshop({
-      groupId,
-      groupName: group.groupName,
-      status: 'pending'
-    })
+    const activeWorkshop = await repository.getActiveWorkshop()
 
-    await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'toursお櫛田' })
+    if (activeWorkshop) {
+      await repository.setWorkshop({
+        groupId,
+        groupName: group.groupName,
+        status: 'pending'
+      })
+
+      await lineClient.pushMessage(activeWorkshop.groupId, { type: 'text', text: '変われ' })
+      await lineClient.replyMessage(event.replyToken, { type: 'text', text: '2個おくれんの？' })
+    } else {
+      await repository.setWorkshop({
+        groupId,
+        groupName: group.groupName,
+        status: 'active'
+      })
+
+      await lineClient.replyMessage(event.replyToken, { type: 'text', text: '完了' })
+    }
   } else {
     await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'こんなことはありえない' })
   }
