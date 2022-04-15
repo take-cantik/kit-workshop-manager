@@ -8,16 +8,16 @@ export interface FirebaseUser {
 }
 
 export class UserFirebaseRepository {
-  async getUser(lineId: string) {
+  async getUser(lineId: string): Promise<FirebaseUser | null> {
     try {
-      const res = await db.collection('users').where('lineId', '==', lineId).get()
+      const res = await db.collection('users').doc(lineId).get()
 
-      if (res.docs.length) {
+      if (res.data()) {
         return {
-          lineId: res.docs[0].data().lineId,
-          name: res.docs[0].data().name,
-          group: res.docs[0].data().group
-        } as FirebaseUser
+          lineId: res.data()!.lineId,
+          name: res.data()!.name,
+          group: res.data()!.group
+        }
       }
 
       return null
