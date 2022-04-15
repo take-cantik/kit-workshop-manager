@@ -46,7 +46,7 @@ export const msgJoin: FlexMessage = {
           action: {
             type: 'postback',
             label: 'はい',
-            data: 'はい',
+            data: '工房登録',
             displayText: 'はい'
           },
           color: '#004C6D'
