@@ -6,7 +6,7 @@ import { followHandler } from './follow'
 import { joinHandler } from './join'
 import { messagesHandler } from './messages'
 import { errorLogger } from '~/utils/util'
-import { postbackHandler } from './hostbacks'
+import { postbackHandler } from './postbacks'
 
 export const handlers = async (event: WebhookEvent): Promise<void> => {
   try {
