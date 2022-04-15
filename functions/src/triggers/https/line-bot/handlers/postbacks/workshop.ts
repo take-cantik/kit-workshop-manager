@@ -1,6 +1,7 @@
 import { PostbackEvent } from '@line/bot-sdk'
 import { WorkshopFirebaseRepository } from '~/repository/WorkshopFirebaseRepository'
 import { lineClient } from '~/utils/line'
+import { msgPending, msgRequest } from '~line/notice-messages/postbacks/workshop'
 
 export const workshopHandler = async (event: PostbackEvent): Promise<void> => {
   const repository = new WorkshopFirebaseRepository()
@@ -18,8 +19,8 @@ export const workshopHandler = async (event: PostbackEvent): Promise<void> => {
         status: 'pending'
       })
 
-      await lineClient.pushMessage(activeWorkshop.groupId, { type: 'text', text: '変われ' })
-      await lineClient.replyMessage(event.replyToken, { type: 'text', text: '2個おくれんの？' })
+      await lineClient.pushMessage(activeWorkshop.groupId, msgRequest(group.groupName))
+      await lineClient.replyMessage(event.replyToken, msgPending(activeWorkshop.groupName))
     } else {
       await repository.setWorkshop({
         groupId,

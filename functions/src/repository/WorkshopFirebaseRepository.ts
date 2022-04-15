@@ -1,6 +1,5 @@
 import { Workshop, WorkshopStatus } from '~/Domain/Workshop'
 import { db } from '~/utils/firebase'
-import { lineClient } from '~/utils/line'
 import { errorLogger } from '~/utils/util'
 
 export class WorkshopFirebaseRepository {
