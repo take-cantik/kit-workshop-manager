@@ -57,7 +57,7 @@ export const msgRequest = (sendingGroupName: string): FlexMessage => {
             action: {
               type: 'postback',
               label: '承認する',
-              data: '承認',
+              data: 'workshopChange,承認',
               displayText: '承認する'
             },
             color: '#4EB2D6'
@@ -70,7 +70,7 @@ export const msgRequest = (sendingGroupName: string): FlexMessage => {
             action: {
               type: 'postback',
               label: '拒否する',
-              data: '拒否',
+              data: 'workshopChange,拒否',
               displayText: '拒否する'
             },
             color: '#D93535'
@@ -147,7 +147,7 @@ export const msgPending = (activeWorkshopName: string): FlexMessage => {
             action: {
               type: 'postback',
               label: '再通知をする',
-              data: '再通知',
+              data: 'pending,再通知',
               displayText: '再通知をする'
             },
             color: '#D93535',

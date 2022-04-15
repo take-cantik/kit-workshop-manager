@@ -46,7 +46,7 @@ export const msgJoin: FlexMessage = {
           action: {
             type: 'postback',
             label: 'はい',
-            data: '工房登録',
+            data: 'workshopInit,工房登録',
             displayText: 'はい'
           },
           color: '#004C6D'
@@ -59,7 +59,7 @@ export const msgJoin: FlexMessage = {
           action: {
             type: 'postback',
             label: 'いいえ',
-            data: 'いいえ',
+            data: 'workshopInit,いいえ',
             displayText: 'いいえ'
           },
           color: '#D93535'

@@ -96,7 +96,7 @@ export const msgRegistered = (name: string, group: string): FlexMessage => {
             action: {
               type: 'postback',
               label: 'はい',
-              data: 'ユーザー変更',
+              data: 'userChange,ユーザー変更',
               displayText: 'はい'
             },
             color: '#004C6D'
@@ -109,7 +109,7 @@ export const msgRegistered = (name: string, group: string): FlexMessage => {
             action: {
               type: 'postback',
               label: 'いいえ',
-              data: 'いいえ',
+              data: 'userChange,いいえ',
               displayText: 'いいえ'
             },
             color: '#D93535'
@@ -221,7 +221,7 @@ export const msgAlreadyRegistered = (name: string, group: string): FlexMessage =
             action: {
               type: 'postback',
               label: 'はい',
-              data: 'ユーザー変更',
+              data: 'userChange,ユーザー変更',
               displayText: 'はい'
             },
             color: '#004C6D'
@@ -234,7 +234,7 @@ export const msgAlreadyRegistered = (name: string, group: string): FlexMessage =
             action: {
               type: 'postback',
               label: 'いいえ',
-              data: 'いいえ',
+              data: 'userChange,いいえ',
               displayText: 'いいえ'
             },
             color: '#D93535'

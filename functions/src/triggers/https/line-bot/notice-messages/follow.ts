@@ -50,7 +50,7 @@ export const msgFollow: FlexMessage = {
           action: {
             type: 'postback',
             label: 'プログラミング研究会',
-            data: 'プログラミング研究会',
+            data: 'group,プログラミング研究会',
             displayText: 'プログラミング研究会で登録します'
           }
         },
@@ -62,7 +62,7 @@ export const msgFollow: FlexMessage = {
           action: {
             type: 'postback',
             label: 'KEPRA',
-            data: 'KEPRA',
+            data: 'group,KEPRA',
             displayText: 'KEPRAで登録します'
           }
         },
@@ -74,7 +74,7 @@ export const msgFollow: FlexMessage = {
           action: {
             type: 'postback',
             label: 'KITCATS',
-            data: 'KITCATS',
+            data: 'group,KITCATS',
             displayText: 'KITCATSで登録します'
           }
         },
@@ -86,7 +86,7 @@ export const msgFollow: FlexMessage = {
           action: {
             type: 'postback',
             label: 'DEAGLE',
-            data: 'DEAGLE',
+            data: 'group,DEAGLE',
             displayText: 'DEAGLEで登録します'
           }
         },
@@ -98,7 +98,7 @@ export const msgFollow: FlexMessage = {
           action: {
             type: 'postback',
             label: '自然科学部',
-            data: '自然科学部',
+            data: 'group,自然科学部',
             displayText: '自然科学部で登録します'
           }
         },
@@ -110,7 +110,7 @@ export const msgFollow: FlexMessage = {
           action: {
             type: 'postback',
             label: '寮tech',
-            data: '寮tech',
+            data: 'group,寮tech',
             displayText: '寮techで登録します'
           }
         },
@@ -122,7 +122,7 @@ export const msgFollow: FlexMessage = {
           action: {
             type: 'postback',
             label: 'その他',
-            data: 'その他',
+            data: 'group,その他',
             displayText: 'その他で登録します'
           }
         }
