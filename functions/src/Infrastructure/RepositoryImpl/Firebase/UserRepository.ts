@@ -31,4 +31,13 @@ export class UserRepository implements UserRepositoryInterface {
       throw new Error('addUser')
     }
   }
+
+  async updateUser(user: User): Promise<void> {
+    try {
+      await db.collection('users').doc(user.lineId).update(user)
+    } catch (err) {
+      errorLogger(err)
+      throw new Error('updateUser')
+    }
+  }
 }
