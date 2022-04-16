@@ -58,7 +58,7 @@ export const msgRequest = (sendingGroupId: string, sendingGroupName: string, uui
             action: {
               type: 'postback',
               label: '承認する',
-              data: postbackData('workshopChange', '承認', sendingGroupId, uuid),
+              data: postbackData('workshopChange', '承認', uuid, sendingGroupId),
               displayText: '承認する'
             },
             color: '#4EB2D6'
@@ -71,7 +71,7 @@ export const msgRequest = (sendingGroupId: string, sendingGroupName: string, uui
             action: {
               type: 'postback',
               label: '拒否する',
-              data: postbackData('workshopChange', '拒否', sendingGroupId, uuid),
+              data: postbackData('workshopChange', '拒否', uuid, sendingGroupId),
               displayText: '拒否する'
             },
             color: '#D93535'
@@ -148,7 +148,7 @@ export const msgPending = (activeWorkshopId: string, activeWorkshopName: string,
             action: {
               type: 'postback',
               label: '再通知をする',
-              data: postbackData('pending', '再通知', activeWorkshopId, uuid),
+              data: postbackData('pending', '再通知', uuid, activeWorkshopId),
               displayText: '再通知をする'
             },
             color: '#D93535',

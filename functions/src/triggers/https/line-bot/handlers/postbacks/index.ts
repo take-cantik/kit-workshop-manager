@@ -28,11 +28,11 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
     }
 
     if (prefix === 'workshopChange') {
-      await workshopChangeHandler(event)
+      await workshopChangeHandler(event, uuid)
     }
 
     if (prefix === 'pending') {
-      await pendingHandler(event)
+      await pendingHandler(event, uuid)
     }
 
     if (prefix === 'userChange') {

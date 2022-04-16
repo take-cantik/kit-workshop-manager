@@ -1,6 +1,7 @@
 import { FlexMessage } from '@line/bot-sdk'
+import { postbackData } from '~/utils/postback'
 
-export const msgReRequest = (sendingGroupId: string, sendingGroupName: string): FlexMessage => {
+export const msgReRequest = (sendingGroupId: string, sendingGroupName: string, uuid: string): FlexMessage => {
   return {
     type: 'flex',
     altText: 'グループ変更',
@@ -57,7 +58,7 @@ export const msgReRequest = (sendingGroupId: string, sendingGroupName: string): 
             action: {
               type: 'postback',
               label: '承認する',
-              data: `workshopChange,承認,${sendingGroupId}`,
+              data: postbackData('workshopChange', '承認', uuid, sendingGroupId),
               displayText: '承認する'
             },
             color: '#4EB2D6'
@@ -70,7 +71,7 @@ export const msgReRequest = (sendingGroupId: string, sendingGroupName: string): 
             action: {
               type: 'postback',
               label: '拒否する',
-              data: `workshopChange,拒否,${sendingGroupId}`,
+              data: postbackData('workshopChange', '拒否', uuid, sendingGroupId),
               displayText: '拒否する'
             },
             color: '#D93535'
