@@ -4,7 +4,7 @@ import { lineClient } from '~/utils/line'
 import { getData } from '~/utils/postback'
 import { msgPending, msgRequest, msgWorkshopRegistered } from '~line/notice-messages/postbacks/workshop'
 
-export const workshopInitHandler = async (event: PostbackEvent): Promise<void> => {
+export const workshopInitHandler = async (event: PostbackEvent, uuid: string): Promise<void> => {
   const repository = new WorkshopFirebaseRepository()
   const data = getData(event)
 
@@ -24,8 +24,11 @@ export const workshopInitHandler = async (event: PostbackEvent): Promise<void> =
           status: 'pending'
         })
 
-        await lineClient.pushMessage(activeWorkshop.groupId, msgRequest(groupId, group.groupName))
-        await lineClient.replyMessage(event.replyToken, msgPending(activeWorkshop.groupId, activeWorkshop.groupName))
+        await lineClient.pushMessage(activeWorkshop.groupId, msgRequest(groupId, group.groupName, uuid))
+        await lineClient.replyMessage(
+          event.replyToken,
+          msgPending(activeWorkshop.groupId, activeWorkshop.groupName, uuid)
+        )
       }
     } else {
       await repository.setWorkshop({

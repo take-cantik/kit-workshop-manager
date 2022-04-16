@@ -1,6 +1,7 @@
 import { FlexMessage } from '@line/bot-sdk'
+import { postbackData } from '~/utils/postback'
 
-export const msgRequest = (sendingGroupId: string, sendingGroupName: string): FlexMessage => {
+export const msgRequest = (sendingGroupId: string, sendingGroupName: string, uuid: string): FlexMessage => {
   return {
     type: 'flex',
     altText: 'グループ変更',
@@ -57,7 +58,7 @@ export const msgRequest = (sendingGroupId: string, sendingGroupName: string): Fl
             action: {
               type: 'postback',
               label: '承認する',
-              data: `workshopChange,承認,${sendingGroupId}`,
+              data: postbackData('workshopChange', '承認', sendingGroupId, uuid),
               displayText: '承認する'
             },
             color: '#4EB2D6'
@@ -70,7 +71,7 @@ export const msgRequest = (sendingGroupId: string, sendingGroupName: string): Fl
             action: {
               type: 'postback',
               label: '拒否する',
-              data: `workshopChange,拒否,${sendingGroupId}`,
+              data: postbackData('workshopChange', '拒否', sendingGroupId, uuid),
               displayText: '拒否する'
             },
             color: '#D93535'
@@ -86,7 +87,7 @@ export const msgRequest = (sendingGroupId: string, sendingGroupName: string): Fl
   }
 }
 
-export const msgPending = (activeWorkshopId: string, activeWorkshopName: string): FlexMessage => {
+export const msgPending = (activeWorkshopId: string, activeWorkshopName: string, uuid: string): FlexMessage => {
   return {
     type: 'flex',
     altText: '承認待ち',
@@ -147,7 +148,7 @@ export const msgPending = (activeWorkshopId: string, activeWorkshopName: string)
             action: {
               type: 'postback',
               label: '再通知をする',
-              data: `pending,再通知,${activeWorkshopId}`,
+              data: postbackData('pending', '再通知', activeWorkshopId, uuid),
               displayText: '再通知をする'
             },
             color: '#D93535',

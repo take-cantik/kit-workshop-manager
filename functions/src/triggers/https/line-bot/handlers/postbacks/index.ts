@@ -24,7 +24,7 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
     }
 
     if (prefix === 'workshopInit') {
-      await workshopInitHandler(event)
+      await workshopInitHandler(event, uuid)
     }
 
     if (prefix === 'workshopChange') {
