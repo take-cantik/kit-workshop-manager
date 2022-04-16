@@ -1,5 +1,6 @@
 import { PostbackEvent } from '@line/bot-sdk'
 import { groupHandler } from './group'
+import { pendingHandler } from './pending'
 import { workshopChangeHandler } from './workshops/workshopChange'
 import { workshopInitHandler } from './workshops/workshopInit'
 
@@ -22,7 +23,7 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   }
 
   if (prefix === 'pending') {
-    //
+    await pendingHandler(event, data, groupId)
   }
 
   if (prefix === 'userChange') {

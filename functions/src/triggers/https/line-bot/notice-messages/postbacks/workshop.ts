@@ -86,7 +86,7 @@ export const msgRequest = (sendingGroupId: string, sendingGroupName: string): Fl
   }
 }
 
-export const msgPending = (activeWorkshopName: string): FlexMessage => {
+export const msgPending = (activeWorkshopId: string, activeWorkshopName: string): FlexMessage => {
   return {
     type: 'flex',
     altText: '承認待ち',
@@ -147,7 +147,7 @@ export const msgPending = (activeWorkshopName: string): FlexMessage => {
             action: {
               type: 'postback',
               label: '再通知をする',
-              data: 'pending,再通知',
+              data: `pending,再通知,${activeWorkshopId}`,
               displayText: '再通知をする'
             },
             color: '#D93535',
