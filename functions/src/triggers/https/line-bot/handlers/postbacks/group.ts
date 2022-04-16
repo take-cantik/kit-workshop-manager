@@ -7,20 +7,24 @@ import { msgAlreadyRegistered, msgRegistered } from '~line/notice-messages/postb
 export const groupHandler = async (event: PostbackEvent, uuid: string): Promise<void> => {
   const repository = new UserRepository()
 
-  const user = await repository.getUser(event.source.userId!)
   const data = getData(event)
+  const group = ['プログラミング研究会', 'KEPRA', 'KITCATS', 'DEAGLE', '自然科学部', '寮tech', 'その他']
 
-  if (user) {
-    await lineClient.replyMessage(event.replyToken, msgAlreadyRegistered(user.name, user.group, uuid))
-  } else {
-    const lineUser = await lineClient.getProfile(event.source.userId!)
+  if (group.includes(data)) {
+    const user = await repository.getUser(event.source.userId!)
 
-    repository.addUser({
-      lineId: event.source.userId as string,
-      name: lineUser.displayName,
-      group: data
-    })
+    if (user) {
+      await lineClient.replyMessage(event.replyToken, msgAlreadyRegistered(user.name, user.group, uuid))
+    } else {
+      const lineUser = await lineClient.getProfile(event.source.userId!)
 
-    await lineClient.replyMessage(event.replyToken, msgRegistered(lineUser.displayName, data, uuid))
+      repository.addUser({
+        lineId: event.source.userId as string,
+        name: lineUser.displayName,
+        group: data
+      })
+
+      await lineClient.replyMessage(event.replyToken, msgRegistered(lineUser.displayName, data, uuid))
+    }
   }
 }
