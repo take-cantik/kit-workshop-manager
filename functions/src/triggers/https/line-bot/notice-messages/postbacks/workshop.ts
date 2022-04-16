@@ -276,3 +276,68 @@ export const msgWorkshopDisable = (groupName: string): FlexMessage => {
     }
   }
 }
+
+export const msgReject = (groupName: string): FlexMessage => {
+  return {
+    type: 'flex',
+    altText: '拒否されました',
+    contents: {
+      type: 'bubble',
+      header: {
+        type: 'box',
+        contents: [
+          {
+            type: 'text',
+            text: '申請が拒否されました',
+            weight: 'bold',
+            size: 'md',
+            position: 'relative',
+            margin: 'none',
+            color: '#ffffff'
+          }
+        ],
+        layout: 'vertical',
+        paddingAll: 'xl',
+        paddingStart: 'xxl',
+        backgroundColor: '#D93535'
+      },
+      body: {
+        type: 'box',
+        layout: 'vertical',
+        contents: [
+          {
+            type: 'text',
+            weight: 'bold',
+            size: 'lg',
+            text: `「${groupName}」からbot利用が拒否されました`,
+            wrap: true,
+            align: 'center'
+          }
+        ],
+        paddingAll: 'xxl',
+        paddingBottom: 'sm'
+      },
+      footer: {
+        type: 'box',
+        layout: 'vertical',
+        contents: [
+          {
+            type: 'button',
+            action: {
+              type: 'postback',
+              label: 'もう一度申請する',
+              data: 'workshopInit,工房登録',
+              displayText: 'もう一度申請する'
+            },
+            color: '#D93535'
+          }
+        ]
+      },
+      styles: {
+        footer: {
+          separator: false
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { PostbackEvent } from '@line/bot-sdk'
 import { WorkshopFirebaseRepository } from '~/repository/WorkshopFirebaseRepository'
 import { lineClient } from '~/utils/line'
-import { msgPending, msgRequest } from '~line/notice-messages/postbacks/workshop'
+import { msgPending, msgRequest, msgWorkshopRegistered } from '~line/notice-messages/postbacks/workshop'
 
 export const workshopInitHandler = async (event: PostbackEvent, data: string): Promise<void> => {
   const repository = new WorkshopFirebaseRepository()
@@ -28,7 +28,7 @@ export const workshopInitHandler = async (event: PostbackEvent, data: string): P
         status: 'active'
       })
 
-      await lineClient.replyMessage(event.replyToken, { type: 'text', text: '完了' })
+      await lineClient.replyMessage(event.replyToken, msgWorkshopRegistered(group.groupName))
     }
   } else if (data === 'いいえ') {
     await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'わかりました' })
