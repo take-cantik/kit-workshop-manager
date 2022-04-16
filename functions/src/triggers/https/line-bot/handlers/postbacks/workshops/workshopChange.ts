@@ -1,24 +1,32 @@
 import { PostbackEvent } from '@line/bot-sdk'
 import { WorkshopFirebaseRepository } from '~/repository/WorkshopFirebaseRepository'
 import { lineClient } from '~/utils/line'
+import { getData, getGroupId } from '~/utils/postback'
 import { msgReject, msgWorkshopDisable, msgWorkshopRegistered } from '../../../notice-messages/postbacks/workshop'
 
-export const workshopChangeHandler = async (event: PostbackEvent, data: string, pendingGroupId: string) => {
+export const workshopChangeHandler = async (event: PostbackEvent) => {
   const repository = new WorkshopFirebaseRepository()
 
-  const pendingGroup = await lineClient.getGroupSummary(pendingGroupId)
+  const data = getData(event)
+  const pendingGroupId = getGroupId(event)
 
-  if (event.source.type === 'group' && data === '承認') {
-    await repository.changeStatus(event.source.groupId, 'disable')
-    await repository.changeStatus(pendingGroupId, 'active')
+  if (pendingGroupId && event.source.type === 'group') {
+    const pendingGroup = await lineClient.getGroupSummary(pendingGroupId)
 
-    await lineClient.pushMessage(pendingGroupId, msgWorkshopRegistered(pendingGroup.groupName))
+    if (data === '承認') {
+      await repository.changeStatus(event.source.groupId, 'disable')
+      await repository.changeStatus(pendingGroupId, 'active')
 
-    const currentGroup = await lineClient.getGroupSummary(event.source.groupId)
-    await lineClient.replyMessage(event.replyToken, msgWorkshopDisable(currentGroup.groupName))
-  } else if (data === '拒否') {
-    await repository.changeStatus(pendingGroupId, 'disable')
-    await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'わかりました' })
-    await lineClient.pushMessage(pendingGroupId, msgReject(pendingGroup.groupName))
+      await lineClient.pushMessage(pendingGroupId, msgWorkshopRegistered(pendingGroup.groupName))
+
+      const currentGroup = await lineClient.getGroupSummary(event.source.groupId)
+      await lineClient.replyMessage(event.replyToken, msgWorkshopDisable(currentGroup.groupName))
+    } else if (data === '拒否') {
+      await repository.changeStatus(pendingGroupId, 'disable')
+      await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'わかりました' })
+      await lineClient.pushMessage(pendingGroupId, msgReject(pendingGroup.groupName))
+    }
+  } else {
+    throw new Error('workshopChange')
   }
 }

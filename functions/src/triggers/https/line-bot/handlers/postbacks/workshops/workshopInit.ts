@@ -1,10 +1,12 @@
 import { PostbackEvent } from '@line/bot-sdk'
 import { WorkshopFirebaseRepository } from '~/repository/WorkshopFirebaseRepository'
 import { lineClient } from '~/utils/line'
+import { getData } from '~/utils/postback'
 import { msgPending, msgRequest, msgWorkshopRegistered } from '~line/notice-messages/postbacks/workshop'
 
-export const workshopInitHandler = async (event: PostbackEvent, data: string): Promise<void> => {
+export const workshopInitHandler = async (event: PostbackEvent): Promise<void> => {
   const repository = new WorkshopFirebaseRepository()
+  const data = getData(event)
 
   if (event.source.type === 'group' && data === '工房登録') {
     const groupId = event.source.groupId

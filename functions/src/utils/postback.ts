@@ -1,19 +1,21 @@
+import { PostbackEvent } from '@line/bot-sdk'
+
 export const postbackData = (prefix: string, data: string, uuid: string, groupId?: string) => {
   return `${prefix},${data},${groupId ? groupId : '*'},${uuid}`
 }
 
-export const getPrefix = (postbackData: string) => {
-  const dataArray = postbackData.split(',')
+export const getPrefix = (event: PostbackEvent) => {
+  const dataArray = event.postback.data.split(',')
   return dataArray[0]
 }
 
-export const getData = (postbackData: string) => {
-  const dataArray = postbackData.split(',')
+export const getData = (event: PostbackEvent) => {
+  const dataArray = event.postback.data.split(',')
   return dataArray[1]
 }
 
-export const getGroupId = (postbackData: string) => {
-  const dataArray = postbackData.split(',')
+export const getGroupId = (event: PostbackEvent) => {
+  const dataArray = event.postback.data.split(',')
   if (dataArray[2] !== '*') {
     return dataArray[2]
   } else {
@@ -21,7 +23,7 @@ export const getGroupId = (postbackData: string) => {
   }
 }
 
-export const getUuid = (postbackData: string) => {
-  const dataArray = postbackData.split(',')
+export const getUuid = (event: PostbackEvent) => {
+  const dataArray = event.postback.data.split(',')
   return dataArray[3]
 }

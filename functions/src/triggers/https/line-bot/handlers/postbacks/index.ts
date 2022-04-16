@@ -1,29 +1,27 @@
 import { PostbackEvent } from '@line/bot-sdk'
+import { getPrefix } from '~/utils/postback'
 import { groupHandler } from './group'
 import { pendingHandler } from './pending'
 import { workshopChangeHandler } from './workshops/workshopChange'
 import { workshopInitHandler } from './workshops/workshopInit'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
-  const dataArray = event.postback.data.split(',')
-  const prefix = dataArray[0]
-  const data = dataArray[1]
-  const groupId = dataArray[2]
+  const prefix = getPrefix(event)
 
   if (prefix === 'group') {
-    await groupHandler(event, data)
+    await groupHandler(event)
   }
 
   if (prefix === 'workshopInit') {
-    await workshopInitHandler(event, data)
+    await workshopInitHandler(event)
   }
 
   if (prefix === 'workshopChange') {
-    await workshopChangeHandler(event, data, groupId)
+    await workshopChangeHandler(event)
   }
 
   if (prefix === 'pending') {
-    await pendingHandler(event, data, groupId)
+    await pendingHandler(event)
   }
 
   if (prefix === 'userChange') {
