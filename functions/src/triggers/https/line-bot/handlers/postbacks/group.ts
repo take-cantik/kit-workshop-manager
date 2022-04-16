@@ -1,11 +1,11 @@
 import { PostbackEvent } from '@line/bot-sdk'
-import { UserFirebaseRepository } from '~/repository/UserFirebaseRepository'
+import { UserRepository } from '~/Infrastructure/RepositoryImpl/Firebase/UserRepository'
 import { lineClient } from '~/utils/line'
 import { getData } from '~/utils/postback'
 import { msgAlreadyRegistered, msgRegistered } from '~line/notice-messages/postbacks/group'
 
 export const groupHandler = async (event: PostbackEvent, uuid: string): Promise<void> => {
-  const repository = new UserFirebaseRepository()
+  const repository = new UserRepository()
 
   const user = await repository.getUser(event.source.userId!)
   const data = getData(event)

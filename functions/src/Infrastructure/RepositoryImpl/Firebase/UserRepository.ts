@@ -1,8 +1,9 @@
-import { User } from '~/Domain/User'
+import { User } from '~/Domains/Entities/User'
+import { UserRepositoryInterface } from '~/Domains/Repositories/UserRepository'
 import { db } from '~/utils/firebase'
 import { errorLogger } from '~/utils/util'
 
-export class UserFirebaseRepository {
+export class UserRepository implements UserRepositoryInterface {
   async getUser(lineId: string): Promise<User | null> {
     try {
       const res = await db.collection('users').doc(lineId).get()
@@ -22,7 +23,7 @@ export class UserFirebaseRepository {
     }
   }
 
-  async addUser(user: User) {
+  async addUser(user: User): Promise<void> {
     try {
       await db.collection('users').doc(user.lineId).set(user)
     } catch (err) {

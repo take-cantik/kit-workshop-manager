@@ -1,9 +1,10 @@
-import { Workshop, WorkshopStatus } from '~/Domain/Workshop'
+import { Workshop, WorkshopStatus } from '~/Domains/Entities/Workshop'
+import { WorkshopRepositoryInterface } from '~/Domains/Repositories/WorkshopRepository'
 import { db } from '~/utils/firebase'
 import { errorLogger } from '~/utils/util'
 
-export class WorkshopFirebaseRepository {
-  async setWorkshop(workshop: Workshop) {
+export class WorkshopRepository implements WorkshopRepositoryInterface {
+  async setWorkshop(workshop: Workshop): Promise<void> {
     try {
       await db.collection('workshop').doc(workshop.groupId).set(workshop)
     } catch (err) {
@@ -21,7 +22,7 @@ export class WorkshopFirebaseRepository {
     }
   }
 
-  async getWorkshopList(status?: WorkshopStatus) {
+  async getWorkshopList(status?: WorkshopStatus): Promise<Workshop[]> {
     try {
       const workshopList: Workshop[] = []
 
@@ -52,7 +53,7 @@ export class WorkshopFirebaseRepository {
     }
   }
 
-  async getActiveWorkshop() {
+  async getActiveWorkshop(): Promise<Workshop | null> {
     const workshopList = await this.getWorkshopList('active')
 
     if (workshopList.length) {
