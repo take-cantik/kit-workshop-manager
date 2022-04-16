@@ -1,6 +1,6 @@
 import { PostbackEvent } from '@line/bot-sdk'
 import { groupHandler } from './group'
-import { workshopHandler } from './workshop'
+import { workshopInitHandler } from './workshops/workshopInit'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   const dataArray = event.postback.data.split(',')
@@ -12,7 +12,7 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   }
 
   if (prefix === 'workshopInit') {
-    await workshopHandler(event, data)
+    await workshopInitHandler(event, data)
   }
 
   if (prefix === 'workshopChange') {

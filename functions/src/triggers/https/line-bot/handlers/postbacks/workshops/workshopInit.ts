@@ -3,7 +3,7 @@ import { WorkshopFirebaseRepository } from '~/repository/WorkshopFirebaseReposit
 import { lineClient } from '~/utils/line'
 import { msgPending, msgRequest } from '~line/notice-messages/postbacks/workshop'
 
-export const workshopHandler = async (event: PostbackEvent, data: string): Promise<void> => {
+export const workshopInitHandler = async (event: PostbackEvent, data: string): Promise<void> => {
   const repository = new WorkshopFirebaseRepository()
 
   if (event.source.type === 'group' && data === '工房登録') {
