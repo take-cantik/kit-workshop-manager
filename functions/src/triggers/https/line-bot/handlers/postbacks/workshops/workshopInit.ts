@@ -19,7 +19,7 @@ export const workshopInitHandler = async (event: PostbackEvent, data: string): P
         status: 'pending'
       })
 
-      await lineClient.pushMessage(activeWorkshop.groupId, msgRequest(group.groupName))
+      await lineClient.pushMessage(activeWorkshop.groupId, msgRequest(groupId, group.groupName))
       await lineClient.replyMessage(event.replyToken, msgPending(activeWorkshop.groupName))
     } else {
       await repository.setWorkshop({
