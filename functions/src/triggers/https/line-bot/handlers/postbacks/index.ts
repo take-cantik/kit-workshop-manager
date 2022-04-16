@@ -4,8 +4,11 @@ import { groupHandler } from './group'
 import { pendingHandler } from './pending'
 import { workshopChangeHandler } from './workshops/workshopChange'
 import { workshopInitHandler } from './workshops/workshopInit'
+import { v4 as uuidv4 } from 'uuid'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
+  const uuid = uuidv4()
+
   const prefix = getPrefix(event)
 
   if (prefix === 'group') {
