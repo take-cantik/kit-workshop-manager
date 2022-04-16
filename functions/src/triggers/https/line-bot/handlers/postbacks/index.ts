@@ -12,12 +12,12 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   const uuidRepository = new UuidFirebaseRepository()
 
   const eventUuid = getUuid(event)
+
   if (await uuidRepository.existUuid(eventUuid)) {
     await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'このメッセージは既に使用されています' })
   } else {
     const prefix = getPrefix(event)
     const uuid = uuidv4()
-    await uuidRepository.addUuid(uuid)
 
     if (prefix === 'group') {
       await groupHandler(event, uuid)
@@ -39,4 +39,6 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
       //
     }
   }
+
+  await uuidRepository.addUuid(eventUuid)
 }
