@@ -12,7 +12,7 @@ import { lineClient } from '~/utils/line'
       },
       selected: false,
       name: 'richMenuKey',
-      chatBarText: 'お知らせ',
+      chatBarText: 'Tap to open',
       areas: [
         {
           bounds: {
@@ -23,7 +23,7 @@ import { lineClient } from '~/utils/line'
           },
           action: {
             type: 'richmenuswitch',
-            richMenuAliasId: 'richMenuInfo',
+            richMenuAliasId: 'richmenu-alias-info',
             data: 'switchInfo'
           }
         },
@@ -76,7 +76,7 @@ import { lineClient } from '~/utils/line'
       },
       selected: false,
       name: 'richmenuInfo',
-      chatBarText: 'お知らせ',
+      chatBarText: 'Tap to open',
       areas: [
         {
           bounds: {
@@ -87,7 +87,7 @@ import { lineClient } from '~/utils/line'
           },
           action: {
             type: 'richmenuswitch',
-            richMenuAliasId: 'richMenuKey',
+            richMenuAliasId: 'richmenu-alias-key',
             data: 'switchKey'
           }
         },
@@ -144,8 +144,8 @@ import { lineClient } from '~/utils/line'
 
     await lineClient.setDefaultRichMenu(richMenuKeyId)
 
-    await lineClient.createRichMenuAlias(richMenuKeyId, 'richMenuKey')
-    await lineClient.createRichMenuAlias(richMenuInfoId, 'richMenuInfo')
+    await lineClient.createRichMenuAlias(richMenuKeyId, 'richmenu-alias-key')
+    await lineClient.createRichMenuAlias(richMenuInfoId, 'richmenu-alias-info')
   } catch (err) {
     console.error(err)
   }
