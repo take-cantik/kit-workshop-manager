@@ -7,6 +7,7 @@ import { pendingHandler } from './pending'
 import { workshopChangeHandler } from './workshops/workshopChange'
 import { workshopInitHandler } from './workshops/workshopInit'
 import { v4 as uuidv4 } from 'uuid'
+import { userChangeHandler } from './users/userChange'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   const postbackRepository = new PostbackRepository()
@@ -36,7 +37,7 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
     }
 
     if (prefix === 'userChange') {
-      //
+      await userChangeHandler(event, uuid)
     }
   }
 
