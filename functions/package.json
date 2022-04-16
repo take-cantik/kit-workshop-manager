@@ -5,7 +5,7 @@
     "build": "rm -rf dist && tsc",
     "dev": "yarn build && firebase emulators:start --only functions",
     "shell": "yarn build && firebase functions:shell",
-    "richMenu:init": "yarn build && node dist/migrations/richMenuInit.js",
+    "init:richMenu": "yarn build && node dist/migrations/richMenuInit.js",
     "start": "yarn shell",
     "logs": "firebase functions:log",
     "eslint": "eslint --ext \".ts\" . --fix",
