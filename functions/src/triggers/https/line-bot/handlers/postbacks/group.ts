@@ -3,7 +3,7 @@ import { UserFirebaseRepository } from '~/repository/UserFirebaseRepository'
 import { lineClient } from '~/utils/line'
 import { msgAlreadyRegistered, msgRegistered } from '~line/notice-messages/postbacks/group'
 
-export const groupHandler = async (event: PostbackEvent): Promise<void> => {
+export const groupHandler = async (event: PostbackEvent, data: string): Promise<void> => {
   const repository = new UserFirebaseRepository()
 
   const user = await repository.getUser(event.source.userId!)
@@ -16,9 +16,9 @@ export const groupHandler = async (event: PostbackEvent): Promise<void> => {
     repository.addUser({
       lineId: event.source.userId as string,
       name: lineUser.displayName,
-      group: event.postback.data
+      group: data
     })
 
-    await lineClient.replyMessage(event.replyToken, msgRegistered(lineUser.displayName, event.postback.data))
+    await lineClient.replyMessage(event.replyToken, msgRegistered(lineUser.displayName, data))
   }
 }

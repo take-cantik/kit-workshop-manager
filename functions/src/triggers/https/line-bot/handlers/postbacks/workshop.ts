@@ -3,10 +3,10 @@ import { WorkshopFirebaseRepository } from '~/repository/WorkshopFirebaseReposit
 import { lineClient } from '~/utils/line'
 import { msgPending, msgRequest } from '~line/notice-messages/postbacks/workshop'
 
-export const workshopHandler = async (event: PostbackEvent): Promise<void> => {
+export const workshopHandler = async (event: PostbackEvent, data: string): Promise<void> => {
   const repository = new WorkshopFirebaseRepository()
 
-  if (event.source.type === 'group') {
+  if (event.source.type === 'group' && data === '工房登録') {
     const groupId = event.source.groupId
     const group = await lineClient.getGroupSummary(groupId)
 
@@ -30,6 +30,8 @@ export const workshopHandler = async (event: PostbackEvent): Promise<void> => {
 
       await lineClient.replyMessage(event.replyToken, { type: 'text', text: '完了' })
     }
+  } else if (data === 'いいえ') {
+    await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'わかりました' })
   } else {
     await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'こんなことはありえない' })
   }
