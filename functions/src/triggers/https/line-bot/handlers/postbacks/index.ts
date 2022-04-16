@@ -20,7 +20,7 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
     await uuidRepository.addUuid(uuid)
 
     if (prefix === 'group') {
-      await groupHandler(event)
+      await groupHandler(event, uuid)
     }
 
     if (prefix === 'workshopInit') {

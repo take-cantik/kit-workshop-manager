@@ -1,6 +1,7 @@
 import { FlexMessage } from '@line/bot-sdk'
+import { postbackData } from '~/utils/postback'
 
-export const msgRegistered = (name: string, group: string): FlexMessage => {
+export const msgRegistered = (name: string, group: string, uuid: string): FlexMessage => {
   return {
     type: 'flex',
     altText: '登録しました',
@@ -96,7 +97,7 @@ export const msgRegistered = (name: string, group: string): FlexMessage => {
             action: {
               type: 'postback',
               label: 'はい',
-              data: 'userChange,ユーザー変更',
+              data: postbackData('userChange', 'ユーザー変更', uuid),
               displayText: 'はい'
             },
             color: '#004C6D'
@@ -109,7 +110,7 @@ export const msgRegistered = (name: string, group: string): FlexMessage => {
             action: {
               type: 'postback',
               label: 'いいえ',
-              data: 'userChange,いいえ',
+              data: postbackData('userChange', 'いいえ', uuid),
               displayText: 'いいえ'
             },
             color: '#D93535'
@@ -125,7 +126,7 @@ export const msgRegistered = (name: string, group: string): FlexMessage => {
   }
 }
 
-export const msgAlreadyRegistered = (name: string, group: string): FlexMessage => {
+export const msgAlreadyRegistered = (name: string, group: string, uuid: string): FlexMessage => {
   return {
     type: 'flex',
     altText: '登録されています',
@@ -221,7 +222,7 @@ export const msgAlreadyRegistered = (name: string, group: string): FlexMessage =
             action: {
               type: 'postback',
               label: 'はい',
-              data: 'userChange,ユーザー変更',
+              data: postbackData('userChange', 'ユーザー変更', uuid),
               displayText: 'はい'
             },
             color: '#004C6D'
@@ -234,7 +235,7 @@ export const msgAlreadyRegistered = (name: string, group: string): FlexMessage =
             action: {
               type: 'postback',
               label: 'いいえ',
-              data: 'userChange,いいえ',
+              data: postbackData('userChange', 'いいえ', uuid),
               displayText: 'いいえ'
             },
             color: '#D93535'
