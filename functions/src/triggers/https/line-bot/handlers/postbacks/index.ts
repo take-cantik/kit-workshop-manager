@@ -1,5 +1,5 @@
 import { PostbackEvent } from '@line/bot-sdk'
-import { UuidFirebaseRepository } from '~/repository/UuidFirebaseRepository'
+import { PostbackFirebaseRepository } from '~/repository/PostbackFirebaseRepository'
 import { lineClient } from '~/utils/line'
 import { getPrefix, getUuid } from '~/utils/postback'
 import { groupHandler } from './group'
@@ -9,11 +9,11 @@ import { workshopInitHandler } from './workshops/workshopInit'
 import { v4 as uuidv4 } from 'uuid'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
-  const uuidRepository = new UuidFirebaseRepository()
+  const postbackRepository = new PostbackFirebaseRepository()
 
   const eventUuid = getUuid(event)
 
-  if (await uuidRepository.existUuid(eventUuid)) {
+  if (await postbackRepository.existUuid(eventUuid)) {
     await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'このメッセージは既に使用されています' })
   } else {
     const prefix = getPrefix(event)
@@ -40,5 +40,5 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
     }
   }
 
-  await uuidRepository.addUuid(eventUuid)
+  await postbackRepository.addUuid(eventUuid)
 }
