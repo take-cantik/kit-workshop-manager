@@ -163,3 +163,116 @@ export const msgPending = (activeWorkshopName: string): FlexMessage => {
     }
   }
 }
+
+export const msgWorkshopRegistered = (groupName: string): FlexMessage => {
+  return {
+    type: 'flex',
+    altText: '登録しました',
+    contents: {
+      type: 'bubble',
+      header: {
+        type: 'box',
+        contents: [
+          {
+            type: 'text',
+            text: '登録完了',
+            weight: 'bold',
+            size: 'md',
+            position: 'relative',
+            margin: 'none',
+            color: '#ffffff'
+          }
+        ],
+        layout: 'vertical',
+        paddingAll: 'xl',
+        paddingStart: 'xxl',
+        backgroundColor: '#4EB2D6'
+      },
+      body: {
+        type: 'box',
+        layout: 'vertical',
+        contents: [
+          {
+            type: 'text',
+            weight: 'bold',
+            size: 'lg',
+            text: `「${groupName}」がbot用のグループとして登録されました`,
+            wrap: true,
+            align: 'center'
+          }
+        ],
+        paddingAll: 'xxl'
+      },
+      styles: {
+        footer: {
+          separator: false
+        }
+      }
+    }
+  }
+}
+
+export const msgWorkshopDisable = (groupName: string): FlexMessage => {
+  return {
+    type: 'flex',
+    altText: '登録しました',
+    contents: {
+      type: 'bubble',
+      header: {
+        type: 'box',
+        contents: [
+          {
+            type: 'text',
+            text: '登録完了',
+            weight: 'bold',
+            size: 'md',
+            position: 'relative',
+            margin: 'none',
+            color: '#ffffff'
+          }
+        ],
+        layout: 'vertical',
+        paddingAll: 'xl',
+        paddingStart: 'xxl',
+        backgroundColor: '#D93535'
+      },
+      body: {
+        type: 'box',
+        layout: 'vertical',
+        contents: [
+          {
+            type: 'text',
+            weight: 'bold',
+            size: 'lg',
+            text: `「${groupName}」でこのbotは使用できなくなりました`,
+            wrap: true,
+            align: 'center'
+          }
+        ],
+        paddingAll: 'xxl',
+        paddingBottom: 'sm'
+      },
+      footer: {
+        type: 'box',
+        layout: 'vertical',
+        contents: [
+          {
+            type: 'button',
+            action: {
+              type: 'postback',
+              label: 'もう一度使用する',
+              data: 'workshopInit,工房登録',
+              displayText: 'もう一度使用する'
+            },
+            color: '#D93535'
+          }
+        ]
+      },
+      styles: {
+        footer: {
+          separator: false
+        }
+      }
+    }
+  }
+}
