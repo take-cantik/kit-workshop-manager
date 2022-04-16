@@ -4,7 +4,7 @@ import { lineClient } from '~/utils/line'
 import { getData, getGroupId } from '~/utils/postback'
 import { msgReject, msgWorkshopDisable, msgWorkshopRegistered } from '../../../notice-messages/postbacks/workshop'
 
-export const workshopChangeHandler = async (event: PostbackEvent) => {
+export const workshopChangeHandler = async (event: PostbackEvent, uuid: string): Promise<void> => {
   const repository = new WorkshopFirebaseRepository()
 
   const data = getData(event)
@@ -20,11 +20,11 @@ export const workshopChangeHandler = async (event: PostbackEvent) => {
       await lineClient.pushMessage(pendingGroupId, msgWorkshopRegistered(pendingGroup.groupName))
 
       const currentGroup = await lineClient.getGroupSummary(event.source.groupId)
-      await lineClient.replyMessage(event.replyToken, msgWorkshopDisable(currentGroup.groupName))
+      await lineClient.replyMessage(event.replyToken, msgWorkshopDisable(currentGroup.groupName, uuid))
     } else if (data === '拒否') {
       await repository.changeStatus(pendingGroupId, 'disable')
       await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'わかりました' })
-      await lineClient.pushMessage(pendingGroupId, msgReject(pendingGroup.groupName))
+      await lineClient.pushMessage(pendingGroupId, msgReject(pendingGroup.groupName, uuid))
     }
   } else {
     throw new Error('workshopChange')

@@ -213,7 +213,7 @@ export const msgWorkshopRegistered = (groupName: string): FlexMessage => {
   }
 }
 
-export const msgWorkshopDisable = (groupName: string): FlexMessage => {
+export const msgWorkshopDisable = (groupName: string, uuid: string): FlexMessage => {
   return {
     type: 'flex',
     altText: '登録しました',
@@ -262,7 +262,7 @@ export const msgWorkshopDisable = (groupName: string): FlexMessage => {
             action: {
               type: 'postback',
               label: 'もう一度使用する',
-              data: 'workshopInit,工房登録',
+              data: postbackData('workshopInit', '工房登録', uuid),
               displayText: 'もう一度使用する'
             },
             color: '#D93535'
@@ -278,7 +278,7 @@ export const msgWorkshopDisable = (groupName: string): FlexMessage => {
   }
 }
 
-export const msgReject = (groupName: string): FlexMessage => {
+export const msgReject = (groupName: string, uuid: string): FlexMessage => {
   return {
     type: 'flex',
     altText: '拒否されました',
@@ -327,7 +327,7 @@ export const msgReject = (groupName: string): FlexMessage => {
             action: {
               type: 'postback',
               label: 'もう一度申請する',
-              data: 'workshopInit,工房登録',
+              data: postbackData('workshopInit', '工房登録', uuid),
               displayText: 'もう一度申請する'
             },
             color: '#D93535'
