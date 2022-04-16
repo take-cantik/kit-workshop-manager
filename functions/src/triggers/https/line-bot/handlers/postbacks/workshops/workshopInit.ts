@@ -13,14 +13,18 @@ export const workshopInitHandler = async (event: PostbackEvent, data: string): P
     const activeWorkshop = await repository.getActiveWorkshop()
 
     if (activeWorkshop) {
-      await repository.setWorkshop({
-        groupId,
-        groupName: group.groupName,
-        status: 'pending'
-      })
+      if (activeWorkshop.groupId === event.source.groupId) {
+        await lineClient.replyMessage(event.replyToken, { type: 'text', text: '既にこのグループで登録されています' })
+      } else {
+        await repository.setWorkshop({
+          groupId,
+          groupName: group.groupName,
+          status: 'pending'
+        })
 
-      await lineClient.pushMessage(activeWorkshop.groupId, msgRequest(groupId, group.groupName))
-      await lineClient.replyMessage(event.replyToken, msgPending(activeWorkshop.groupName))
+        await lineClient.pushMessage(activeWorkshop.groupId, msgRequest(groupId, group.groupName))
+        await lineClient.replyMessage(event.replyToken, msgPending(activeWorkshop.groupName))
+      }
     } else {
       await repository.setWorkshop({
         groupId,
