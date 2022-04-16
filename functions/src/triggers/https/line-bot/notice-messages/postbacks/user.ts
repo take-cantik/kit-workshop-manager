@@ -216,7 +216,6 @@ export const msgUpdate = (name: string, group: string): FlexMessage => {
                 align: 'center'
               }
             ],
-            paddingTop: 'none',
             paddingAll: 'xxl'
           }
         ],
