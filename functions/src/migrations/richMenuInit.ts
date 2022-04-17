@@ -1,14 +1,26 @@
 import '../alias'
 
-import { RichMenu } from '@line/bot-sdk'
+import { GetRichMenuAliasResponse, RichMenu, RichMenuResponse } from '@line/bot-sdk'
 import fs from 'fs'
 import { lineClient } from '~/utils/line'
 ;(async () => {
   try {
+    const richMenuAliasList = await lineClient.getRichMenuAliasList()
+
+    richMenuAliasList.aliases.forEach(async (alias: GetRichMenuAliasResponse) => {
+      await lineClient.deleteRichMenuAlias(alias.richMenuAliasId)
+    })
+
+    const richMenuList = await lineClient.getRichMenuList()
+
+    richMenuList.forEach(async (richMenu: RichMenuResponse) => {
+      await lineClient.deleteRichMenu(richMenu.richMenuId)
+    })
+
     const richMenuKey: RichMenu = {
       size: {
         width: 2500,
-        height: 843
+        height: 1686
       },
       selected: false,
       name: 'richMenuKey',
@@ -19,7 +31,7 @@ import { lineClient } from '~/utils/line'
             x: 1250,
             y: 0,
             width: 1250,
-            height: 200
+            height: 400
           },
           action: {
             type: 'richmenuswitch',
@@ -30,9 +42,9 @@ import { lineClient } from '~/utils/line'
         {
           bounds: {
             x: 0,
-            y: 200,
+            y: 400,
             width: 833,
-            height: 643
+            height: 1286
           },
           action: {
             type: 'postback',
@@ -43,9 +55,9 @@ import { lineClient } from '~/utils/line'
         {
           bounds: {
             x: 833,
-            y: 200,
+            y: 400,
             width: 834,
-            height: 643
+            height: 1286
           },
           action: {
             type: 'postback',
@@ -56,9 +68,9 @@ import { lineClient } from '~/utils/line'
         {
           bounds: {
             x: 1667,
-            y: 200,
+            y: 400,
             width: 833,
-            height: 643
+            height: 1286
           },
           action: {
             type: 'postback',
@@ -72,7 +84,7 @@ import { lineClient } from '~/utils/line'
     const richMenuInfo: RichMenu = {
       size: {
         width: 2500,
-        height: 843
+        height: 1686
       },
       selected: false,
       name: 'richmenuInfo',
@@ -83,7 +95,7 @@ import { lineClient } from '~/utils/line'
             x: 0,
             y: 0,
             width: 1250,
-            height: 200
+            height: 400
           },
           action: {
             type: 'richmenuswitch',
@@ -94,9 +106,9 @@ import { lineClient } from '~/utils/line'
         {
           bounds: {
             x: 0,
-            y: 200,
+            y: 400,
             width: 833,
-            height: 643
+            height: 1286
           },
           action: {
             type: 'postback',
@@ -107,9 +119,9 @@ import { lineClient } from '~/utils/line'
         {
           bounds: {
             x: 833,
-            y: 200,
+            y: 400,
             width: 834,
-            height: 643
+            height: 1286
           },
           action: {
             type: 'postback',
@@ -120,9 +132,9 @@ import { lineClient } from '~/utils/line'
         {
           bounds: {
             x: 1667,
-            y: 200,
+            y: 400,
             width: 833,
-            height: 643
+            height: 1286
           },
           action: {
             type: 'postback',
