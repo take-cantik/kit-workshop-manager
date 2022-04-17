@@ -8,6 +8,8 @@ import { workshopChangeHandler } from './workshops/workshopChange'
 import { workshopInitHandler } from './workshops/workshopInit'
 import { v4 as uuidv4 } from 'uuid'
 import { userChangeHandler } from './users/userChange'
+import { richMenuKeyHandler } from './richMenus/richMenuKeyHandler'
+import { richMenuInfoHandler } from './richMenus/richMenuInfoHandler'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   const postbackRepository = new PostbackRepository()
@@ -16,9 +18,9 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
     const prefix = getPrefix(event)
 
     if (prefix === 'richMenuKey') {
-      // key handler
+      richMenuKeyHandler(event)
     } else if (prefix === 'richMenuInfo') {
-      // info handler
+      richMenuInfoHandler(event)
     }
   } else {
     const eventUuid = getUuid(event)
