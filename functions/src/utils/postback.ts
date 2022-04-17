@@ -27,3 +27,7 @@ export const getUuid = (event: PostbackEvent) => {
   const dataArray = event.postback.data.split(',')
   return dataArray[3]
 }
+
+export const isRichMenu = (event: PostbackEvent) => {
+  return !!(event.postback.data.indexOf('richMenu') + 1)
+}

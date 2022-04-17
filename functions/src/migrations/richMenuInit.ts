@@ -36,7 +36,7 @@ import { lineClient } from '~/utils/line'
           action: {
             type: 'richmenuswitch',
             richMenuAliasId: 'richmenu-alias-info',
-            data: 'switchInfo'
+            data: 'richMenuSwitch'
           }
         },
         {
@@ -100,7 +100,7 @@ import { lineClient } from '~/utils/line'
           action: {
             type: 'richmenuswitch',
             richMenuAliasId: 'richmenu-alias-key',
-            data: 'switchKey'
+            data: 'richMenuSwitch'
           }
         },
         {
