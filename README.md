@@ -13,7 +13,7 @@ LINE Bot + TypeScript + Firebase Functions のテンプレート
 実行環境
 
 ```bash
-node 14
+node 16
 ```
 
 コマンド
