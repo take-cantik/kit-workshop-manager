@@ -21,7 +21,7 @@ export const handlers = async (event: WebhookEvent): Promise<void> => {
       case 'postback':
         return await postbackHandler(event)
       // case 'message':
-      //   return await messagesHandler(event)
+      // return await messagesHandler(event)
       default:
     }
   } catch (err) {
