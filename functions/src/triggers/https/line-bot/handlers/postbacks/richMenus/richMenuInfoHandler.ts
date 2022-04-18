@@ -1,7 +1,8 @@
 import { PostbackEvent } from '@line/bot-sdk'
 import { getData } from '~/utils/postback'
 
-export const richMenuInfoHandler = (event: PostbackEvent): Promise<void> => {
+export const richMenuInfoHandler = (event: PostbackEvent) => {
+  //: Promise<void> => {
   const data = getData(event)
 
   if (data === '個人情報') {
