@@ -17,12 +17,37 @@ import { lineClient } from '~/utils/line'
       await lineClient.deleteRichMenu(richMenu.richMenuId)
     })
 
+    const richMenuInit: RichMenu = {
+      size: {
+        width: 2500,
+        height: 843
+      },
+      selected: false,
+      name: 'richMenuInit',
+      chatBarText: 'Tap to open',
+      areas: [
+        {
+          bounds: {
+            x: 0,
+            y: 0,
+            width: 2500,
+            height: 843
+          },
+          action: {
+            type: 'postback',
+            displayText: 'はじめる',
+            data: 'richMenuInit'
+          }
+        }
+      ]
+    }
+
     const richMenuKey: RichMenu = {
       size: {
         width: 2500,
         height: 1686
       },
-      selected: false,
+      selected: true,
       name: 'richMenuKey',
       chatBarText: 'Tap to open',
       areas: [
@@ -86,7 +111,7 @@ import { lineClient } from '~/utils/line'
         width: 2500,
         height: 1686
       },
-      selected: false,
+      selected: true,
       name: 'richmenuInfo',
       chatBarText: 'Tap to open',
       areas: [
@@ -145,17 +170,21 @@ import { lineClient } from '~/utils/line'
       ]
     }
 
+    const richMenuInitId = await lineClient.createRichMenu(richMenuInit)
     const richMenuKeyId = await lineClient.createRichMenu(richMenuKey)
     const richMenuInfoId = await lineClient.createRichMenu(richMenuInfo)
 
+    const bufferInit = fs.readFileSync(`${__dirname}/../../assets/images/richMenuInit.jpg`)
     const bufferKey = fs.readFileSync(`${__dirname}/../../assets/images/richMenuKey.jpg`)
     const bufferInfo = fs.readFileSync(`${__dirname}/../../assets/images/richMenuInfo.jpg`)
 
+    await lineClient.setRichMenuImage(richMenuInitId, bufferInit)
     await lineClient.setRichMenuImage(richMenuKeyId, bufferKey)
     await lineClient.setRichMenuImage(richMenuInfoId, bufferInfo)
 
-    await lineClient.setDefaultRichMenu(richMenuKeyId)
+    await lineClient.setDefaultRichMenu(richMenuInitId)
 
+    await lineClient.createRichMenuAlias(richMenuInitId, 'richmenu-alias-init')
     await lineClient.createRichMenuAlias(richMenuKeyId, 'richmenu-alias-key')
     await lineClient.createRichMenuAlias(richMenuInfoId, 'richmenu-alias-info')
   } catch (err) {
