@@ -24,6 +24,8 @@ export const groupHandler = async (event: PostbackEvent, uuid: string): Promise<
         group: data
       })
 
+      const richMenu = await lineClient.getRichMenuAlias('richmenu-alias-key')
+      await lineClient.linkRichMenuToUser(event.source.userId!, richMenu.richMenuId)
       await lineClient.replyMessage(event.replyToken, msgRegistered(lineUser.displayName, data, uuid))
     }
   }

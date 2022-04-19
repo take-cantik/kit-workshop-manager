@@ -11,6 +11,7 @@ import { userChangeHandler } from './users/userChange'
 import { richMenuKeyHandler } from './richMenus/richMenuKey'
 import { richMenuInfoHandler } from './richMenus/richMenuInfo'
 import { keyHandler } from './key'
+import { richMenuInitHandler } from './richMenus/richMenuInit'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   const postbackRepository = new PostbackRepository()
