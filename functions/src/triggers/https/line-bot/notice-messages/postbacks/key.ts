@@ -2,6 +2,7 @@ import { FlexMessage } from '@line/bot-sdk'
 
 export const msgKeyResult = (isOpen: boolean, borrower: string, group: string): FlexMessage => {
   const stateText = isOpen ? 'OPEN' : 'CLOSE'
+  const color = isOpen ? '#E59D3C' : '#8D35D9'
   const actionText = isOpen ? '借りました' : '返しました'
 
   return {
@@ -25,7 +26,7 @@ export const msgKeyResult = (isOpen: boolean, borrower: string, group: string): 
         layout: 'vertical',
         paddingAll: 'xl',
         paddingStart: 'xxl',
-        backgroundColor: '#4EB2D6'
+        backgroundColor: `${color}`
       },
       body: {
         type: 'box',
