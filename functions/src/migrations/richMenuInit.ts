@@ -99,8 +99,8 @@ import { lineClient } from '~/utils/line'
           },
           action: {
             type: 'postback',
-            displayText: '預ける',
-            data: 'richMenuKey,預ける'
+            displayText: '預かる',
+            data: 'richMenuKey,預かる'
           }
         }
       ]
