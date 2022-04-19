@@ -26,6 +26,7 @@ export const keyHandler = async (event: PostbackEvent): Promise<void> => {
     const borrower = await userRepository.getUser(event.source.userId!)
     if (workshop && borrower) {
       await lineClient.pushMessage(workshop.groupId, msgKeyResult(isOpen, borrower.name, borrower.group))
+      await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'グループへ通知されました' })
     } else {
       throw new Error(errorMessage)
     }
