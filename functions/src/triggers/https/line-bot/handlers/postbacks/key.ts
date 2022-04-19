@@ -5,7 +5,7 @@ import { WorkshopRepository } from '~/Infrastructure/RepositoryImpl/Firebase/Wor
 import { getCurrentTime } from '~/utils/day'
 import { lineClient } from '~/utils/line'
 import { getData } from '~/utils/postback'
-import { msgKeyResult } from '../../notice-messages/postbacks/key'
+import { msgKeyReceive, msgKeyResult } from '../../notice-messages/postbacks/key'
 
 export const keyHandler = async (event: PostbackEvent): Promise<void> => {
   const stateRepository = new StateRepository()
@@ -29,6 +29,21 @@ export const keyHandler = async (event: PostbackEvent): Promise<void> => {
       await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'グループへ通知されました' })
     } else {
       throw new Error(errorMessage)
+    }
+  } else if (data == '預かる') {
+    await stateRepository.addState({
+      isOpen: true,
+      responsibleUserId: event.source.userId!,
+      time: getCurrentTime()
+    })
+
+    const workshop = await workshopPrepository.getActiveWorkshop()
+    const borrower = await userRepository.getUser(event.source.userId!)
+    if (workshop && borrower) {
+      await lineClient.pushMessage(workshop.groupId, msgKeyReceive(borrower.name, borrower.group))
+      await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'グループへ通知されました' })
+    } else {
+      throw new Error('Recieve Key')
     }
   } else if (data === 'キャンセル') {
     await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'わかりました' })
