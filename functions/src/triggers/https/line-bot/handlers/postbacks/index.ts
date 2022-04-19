@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { userChangeHandler } from './users/userChange'
 import { richMenuKeyHandler } from './richMenus/richMenuKeyHandler'
 import { richMenuInfoHandler } from './richMenus/richMenuInfoHandler'
+import { keyHandler } from './key'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
   const postbackRepository = new PostbackRepository()
@@ -49,6 +50,10 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
 
       if (prefix === 'userChange') {
         await userChangeHandler(event, uuid)
+      }
+
+      if (prefix === 'key') {
+        await keyHandler(event)
       }
     }
 
