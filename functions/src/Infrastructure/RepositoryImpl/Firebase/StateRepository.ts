@@ -8,7 +8,7 @@ export class StateRepository implements StateRepositoryInterface {
   }
 
   async getLatestState(): Promise<State> {
-    const res = await db.collection('state').orderBy('time').limit(1).get()
+    const res = await db.collection('state').orderBy('time', 'desc').limit(1).get()
     const data = res.docs[0].data()
 
     return {
