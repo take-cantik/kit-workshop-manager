@@ -1,10 +1,8 @@
 import { WebhookEvent } from '@line/bot-sdk'
 import { lineClient } from '~/utils/line'
 import { msgError } from '~line/notice-messages/other'
-
 import { followHandler } from './follow'
 import { joinHandler } from './join'
-// import { messagesHandler } from './messages'
 import { errorLogger } from '~/utils/util'
 import { postbackHandler } from './postbacks'
 import { unfollowHandler } from './unfollow'
@@ -24,7 +22,6 @@ export const handlers = async (event: WebhookEvent): Promise<void> => {
       case 'postback':
         return await postbackHandler(event)
       // case 'message':
-      // return await messagesHandler(event)
       default:
     }
   } catch (err) {
