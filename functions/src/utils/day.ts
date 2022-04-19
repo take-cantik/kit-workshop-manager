@@ -9,5 +9,5 @@ dayjs.tz.setDefault('Asia/Tokyo')
 
 export const getCurrentTime = () => {
   const now = new Date()
-  return dayjs(now).tz().format('YYYY年MM月DD日hh時mm分')
+  return dayjs(now).tz().format('YYYY年MM月DD日HH時mm分')
 }
