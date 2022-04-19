@@ -7,12 +7,15 @@ import { joinHandler } from './join'
 // import { messagesHandler } from './messages'
 import { errorLogger } from '~/utils/util'
 import { postbackHandler } from './postbacks'
+import { unfollowHandler } from './unfollow'
 
 export const handlers = async (event: WebhookEvent): Promise<void> => {
   try {
     switch (event.type) {
       case 'follow':
         return await followHandler(event)
+      case 'unfollow':
+        return await unfollowHandler(event)
       case 'join':
         return await joinHandler(event)
       case 'memberJoined':

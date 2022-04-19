@@ -40,4 +40,13 @@ export class UserRepository implements UserRepositoryInterface {
       throw new Error('updateUser')
     }
   }
+
+  async deleteUser(lineId: string): Promise<void> {
+    try {
+      await db.collection('users').doc(lineId).delete()
+    } catch (err) {
+      errorLogger(err)
+      throw new Error('deleteUser')
+    }
+  }
 }
