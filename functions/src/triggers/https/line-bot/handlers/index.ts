@@ -6,6 +6,7 @@ import { joinHandler } from './join'
 import { errorLogger } from '~/utils/util'
 import { postbackHandler } from './postbacks'
 import { unfollowHandler } from './unfollow'
+import { memberJoinedHandler } from './memberJoined'
 
 export const handlers = async (event: WebhookEvent): Promise<void> => {
   try {
@@ -17,8 +18,7 @@ export const handlers = async (event: WebhookEvent): Promise<void> => {
       case 'join':
         return await joinHandler(event)
       case 'memberJoined':
-        // 友達追加を促す
-        break
+        return await memberJoinedHandler(event)
       case 'postback':
         return await postbackHandler(event)
       // case 'message':
