@@ -23,6 +23,4 @@ const runtimeOpts: RuntimeOptions = {
   memory: '1GB'
 }
 
-// test
-// module.exports = region('asia-northeast1').runWith(runtimeOpts).pubsub.schedule('0 0 21 * * *').onRun(handler)
-module.exports = region('asia-northeast1').runWith(runtimeOpts).pubsub.schedule('* * * * *').onRun(app)
+module.exports = region('asia-northeast1').runWith(runtimeOpts).pubsub.schedule('0 0 21 * * *').onRun(app)
