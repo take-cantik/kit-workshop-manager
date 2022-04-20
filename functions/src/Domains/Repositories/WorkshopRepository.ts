@@ -5,4 +5,5 @@ export interface WorkshopRepositoryInterface {
   changeStatus: (groupId: string, status: WorkshopStatus) => Promise<void>
   getWorkshopList: (status?: WorkshopStatus) => Promise<Workshop[]>
   getActiveWorkshop: () => Promise<Workshop | null>
+  deleteWorkshop: (groupId: string) => Promise<void>
 }

@@ -7,6 +7,7 @@ import { errorLogger } from '~/utils/util'
 import { postbackHandler } from './postbacks'
 import { unfollowHandler } from './unfollow'
 import { memberJoinedHandler } from './memberJoined'
+import { leaveHandler } from './leave'
 
 export const handlers = async (event: WebhookEvent): Promise<void> => {
   try {
@@ -21,6 +22,8 @@ export const handlers = async (event: WebhookEvent): Promise<void> => {
         return await memberJoinedHandler(event)
       case 'postback':
         return await postbackHandler(event)
+      case 'leave':
+        return await leaveHandler(event)
       // case 'message':
       default:
     }

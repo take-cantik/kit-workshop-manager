@@ -62,4 +62,8 @@ export class WorkshopRepository implements WorkshopRepositoryInterface {
       return null
     }
   }
+
+  async deleteWorkshop(groupId: string): Promise<void> {
+    await db.collection('workshop').doc(groupId).delete()
+  }
 }
