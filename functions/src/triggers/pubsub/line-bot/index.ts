@@ -1,10 +1,18 @@
 import { middleware } from '@line/bot-sdk'
-import { region, RuntimeOptions } from 'firebase-functions/v1'
-import { lineClient, lineMiddlewareConfig } from '~/utils/line'
+import { logger, region, RuntimeOptions } from 'firebase-functions/v1'
+import { lineMiddlewareConfig } from '~/utils/line'
+import { errorLogger } from '~/utils/util'
+import { handler } from './handlers'
 
 middleware(lineMiddlewareConfig)
-const handler = async () => {
-  await lineClient.pushMessage(process.env.MY_LINE_ID as string, { type: 'text', text: 'schedule test' })
+const app = () => {
+  new Promise(handler)
+    .then((result) => {
+      logger.info(result)
+    })
+    .catch((err) => {
+      errorLogger(err)
+    })
 }
 
 // *************
@@ -17,4 +25,4 @@ const runtimeOpts: RuntimeOptions = {
 
 // test
 // module.exports = region('asia-northeast1').runWith(runtimeOpts).pubsub.schedule('0 0 21 * * *').onRun(handler)
-module.exports = region('asia-northeast1').runWith(runtimeOpts).pubsub.schedule('* * * * *').onRun(handler)
+module.exports = region('asia-northeast1').runWith(runtimeOpts).pubsub.schedule('* * * * *').onRun(app)
