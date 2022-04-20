@@ -159,12 +159,24 @@ import { lineClient } from '~/utils/line'
             x: 1667,
             y: 400,
             width: 833,
-            height: 1286
+            height: 643
           },
           action: {
             type: 'postback',
             displayText: '使い方',
             data: 'richMenuInfo,使い方'
+          }
+        },
+        {
+          bounds: {
+            x: 1667,
+            y: 1043,
+            width: 833,
+            height: 643
+          },
+          action: {
+            type: 'uri',
+            uri: `${process.env.MY_LINE_LINK as string}`
           }
         }
       ]
