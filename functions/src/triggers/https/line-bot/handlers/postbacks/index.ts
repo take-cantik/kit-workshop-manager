@@ -30,7 +30,7 @@ export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
     const eventUuid = getUuid(event)
 
     if (await postbackRepository.existPostback(eventUuid)) {
-      await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'このメッセージは既に使用されています' })
+      await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'このメッセージは使用できません' })
     } else {
       const prefix = getPrefix(event)
       const uuid = uuidv4()

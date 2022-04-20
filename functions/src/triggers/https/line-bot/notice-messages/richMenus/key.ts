@@ -161,7 +161,7 @@ export const msgReturnKey = (isOpen: boolean, uuid: string): FlexMessage => {
               type: 'postback',
               label: '返した',
               data: postbackData('key', '返す', uuid),
-              displayText: '鍵を借りる'
+              displayText: '鍵を返した'
             }
           },
           {
@@ -173,7 +173,7 @@ export const msgReturnKey = (isOpen: boolean, uuid: string): FlexMessage => {
               type: 'postback',
               label: 'キャンセル',
               data: postbackData('key', 'キャンセル', uuid),
-              displayText: '鍵を返す'
+              displayText: 'キャンセル'
             },
             color: '#D93535'
           }
