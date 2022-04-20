@@ -2,7 +2,7 @@ import { PostbackEvent } from '@line/bot-sdk'
 import { UserRepository } from '~/Infrastructure/RepositoryImpl/Firebase/UserRepository'
 import { lineClient } from '~/utils/line'
 import { getData } from '~/utils/postback'
-import { msgUserInfo, msgWorkshopInfo } from '../../../notice-messages/richMenus/info'
+import { msgUsage, msgUserInfo, msgWorkshopInfo } from '../../../notice-messages/richMenus/info'
 import { v4 as uuidv4 } from 'uuid'
 import { StateRepository } from '~/Infrastructure/RepositoryImpl/Firebase/StateRepository'
 
@@ -31,6 +31,6 @@ export const richMenuInfoHandler = async (event: PostbackEvent): Promise<void> =
       throw new Error('workshopInfo')
     }
   } else if (data === '使い方') {
-    await lineClient.replyMessage(event.replyToken, { type: 'text', text: 'わ、わかんないっピ...' })
+    await lineClient.replyMessage(event.replyToken, msgUsage)
   }
 }

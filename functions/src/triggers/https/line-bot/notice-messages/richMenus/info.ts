@@ -1,4 +1,4 @@
-import { FlexMessage } from '@line/bot-sdk'
+import { FlexMessage, TextMessage } from '@line/bot-sdk'
 import { State } from '~/Domains/Entities/State'
 import { User } from '~/Domains/Entities/User'
 import { postbackData } from '~/utils/postback'
@@ -189,4 +189,9 @@ export const msgWorkshopInfo = (lastState: State, user: User): FlexMessage => {
       }
     }
   }
+}
+
+export const msgUsage: TextMessage = {
+  type: 'text',
+  text: '使い方\n\n鍵を借りた場合には、鍵の管理タブの「借りる」を押してください\n\n鍵を返す場合には、鍵の管理タブの「返す」を押してください\n\n鍵を預かった場合には、鍵の管理タブの「預かる」を押してください\n\n自分の登録情報が見たい場合には情報タブの「個人情報」を押してください\n\n現在の工房の情報を知りたい場合には情報タブの「工房」を押してください\n\nユーザーの登録情報を消したい場合にはこのアカウントをブロックすると消えます\n\n工房用のグループにこのbotを招待すると登録を促されるので、手順に従ってください。\n\n\n注意\n\nこのbotは基本的にメッセージでの対話はできないので、リッチメニューや送られてきたメッセージのボタンを用いてご利用ください。\n\nデータ量が増えすぎた場合や、使用回数があまりにも多い場合にはbotが停止する場合がありますので、常識の範囲内でお使いください\n\n\nなにか不具合や欲しい追加機能などありましたら情報タブの「お問合わせ」から気軽にご連絡ください'
 }
