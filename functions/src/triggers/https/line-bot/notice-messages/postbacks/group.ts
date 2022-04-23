@@ -100,7 +100,7 @@ export const msgRegistered = (name: string, group: string, uuid: string): FlexMe
               data: postbackData('userChange', 'ユーザー変更', uuid),
               displayText: 'はい'
             },
-            color: '#004C6D'
+            color: '#D93535'
           },
           {
             type: 'separator'
@@ -112,8 +112,7 @@ export const msgRegistered = (name: string, group: string, uuid: string): FlexMe
               label: 'いいえ',
               data: postbackData('userChange', 'いいえ', uuid),
               displayText: 'いいえ'
-            },
-            color: '#D93535'
+            }
           }
         ]
       },
@@ -225,7 +224,7 @@ export const msgAlreadyRegistered = (name: string, group: string, uuid: string):
               data: postbackData('userChange', 'ユーザー変更', uuid),
               displayText: 'はい'
             },
-            color: '#004C6D'
+            color: '#D93535'
           },
           {
             type: 'separator'
@@ -237,8 +236,7 @@ export const msgAlreadyRegistered = (name: string, group: string, uuid: string):
               label: 'いいえ',
               data: postbackData('userChange', 'いいえ', uuid),
               displayText: 'いいえ'
-            },
-            color: '#D93535'
+            }
           }
         ]
       },

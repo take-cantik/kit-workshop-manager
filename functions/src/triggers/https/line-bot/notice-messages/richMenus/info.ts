@@ -102,7 +102,7 @@ export const msgUserInfo = (name: string, group: string, uuid: string): FlexMess
               data: postbackData('userChange', 'ユーザー変更', uuid),
               displayText: 'はい'
             },
-            color: '#004C6D'
+            color: '#D93535'
           },
           {
             type: 'separator'
@@ -114,8 +114,7 @@ export const msgUserInfo = (name: string, group: string, uuid: string): FlexMess
               label: 'いいえ',
               data: postbackData('userChange', 'いいえ', uuid),
               displayText: 'いいえ'
-            },
-            color: '#D93535'
+            }
           }
         ]
       },
