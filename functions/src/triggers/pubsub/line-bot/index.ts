@@ -23,4 +23,8 @@ const runtimeOpts: RuntimeOptions = {
   memory: '1GB'
 }
 
-module.exports = region('asia-northeast1').runWith(runtimeOpts).pubsub.schedule('0 21 * * *').onRun(app)
+module.exports = region('asia-northeast1')
+  .runWith(runtimeOpts)
+  .pubsub.schedule('0 21 * * *')
+  .timeZone('Asia/Tokyo')
+  .onRun(app)
