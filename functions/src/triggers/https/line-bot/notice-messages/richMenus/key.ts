@@ -265,7 +265,7 @@ export const msgReceive = (user: User, uuid: string): FlexMessage => {
               type: 'postback',
               label: 'キャンセル',
               data: postbackData('key', 'キャンセル', uuid),
-              displayText: '鍵を返す'
+              displayText: 'キャンセル'
             },
             color: '#D93535'
           }
