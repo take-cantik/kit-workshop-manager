@@ -1,12 +1,20 @@
-# line-bot-typescript-template
+# kit-workshop-manager
 
-LINE Bot + TypeScript + Firebase Functions のテンプレート  
-オウム返しボットです。
+某工業大学のものつくり工房の鍵の管理をするためのbot
+
+### 使用技術
+LINE Bot + TypeScript + Firebase Functions + Firebase Firestore
 
 ## 初期設定
 
 1. .firebaserc ファイルを設定
 2. functions/.env.expample をもとに.env ファイルを作成&設定
+
+## リッチメニューの初期設定
+
+```bash
+$ yarn init:richMenu
+```
 
 ## デプロイ
 
@@ -19,9 +27,7 @@ node 16
 コマンド
 
 ```bash
-cd functions
+$ cd functions
 
-firebase deploy
-or
-firebase deploy --only functions:lineBot
+$ firebase deploy
 ```
