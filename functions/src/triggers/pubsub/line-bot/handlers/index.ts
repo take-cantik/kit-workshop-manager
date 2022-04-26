@@ -4,19 +4,33 @@ import { WorkshopRepository } from '~/Infrastructure/RepositoryImpl/Firebase/Wor
 import { lineClient } from '~/utils/line'
 import { msgGroup, msgParsonal } from '../notice-messages'
 import { v4 as uuidv4 } from 'uuid'
+import { logger } from 'firebase-functions/v1'
 
 export const handler = async () => {
-  const stateRepository = new StateRepository()
-  const workshopRepository = new WorkshopRepository()
-  const userRepository = new UserRepository()
+  try {
+    const stateRepository = new StateRepository()
+    const workshopRepository = new WorkshopRepository()
+    const userRepository = new UserRepository()
 
-  const uuid = uuidv4()
-  const currentState = await stateRepository.getLatestState()
-  const workshop = await workshopRepository.getActiveWorkshop()
-  const lastActiveUser = await userRepository.getUser(currentState.responsibleUserId)
+    const uuid = uuidv4()
+    const currentState = await stateRepository.getLatestState()
+    logger.log('currentState')
+    logger.log(currentState)
+    const workshop = await workshopRepository.getActiveWorkshop()
+    logger.log('workshop')
+    logger.log(workshop)
+    const lastActiveUser = await userRepository.getUser(currentState.responsibleUserId)
+    logger.log('lastActiveUser')
+    logger.log(lastActiveUser)
 
-  if (currentState.isOpen && workshop && lastActiveUser) {
-    await lineClient.pushMessage(workshop.groupId, msgGroup(lastActiveUser.name, lastActiveUser.group, uuid))
-    await lineClient.pushMessage(lastActiveUser.lineId, msgParsonal(uuid))
+    if (currentState.isOpen && workshop && lastActiveUser) {
+      logger.log('まだ空いてる')
+      await lineClient.pushMessage(workshop.groupId, msgGroup(lastActiveUser.name, lastActiveUser.group, uuid))
+      await lineClient.pushMessage(lastActiveUser.lineId, msgParsonal(uuid))
+    } else {
+      logger.log('空いてない')
+    }
+  } catch (err) {
+    logger.log(err)
   }
 }
