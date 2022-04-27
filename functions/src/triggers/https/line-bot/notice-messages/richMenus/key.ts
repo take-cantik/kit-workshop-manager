@@ -99,7 +99,7 @@ export const msgReturnKey = (isOpen: boolean, uuid: string): FlexMessage => {
 
   return {
     type: 'flex',
-    altText: '鍵を借りる',
+    altText: '鍵を返す',
     contents: {
       type: 'bubble',
       header: {
@@ -107,7 +107,7 @@ export const msgReturnKey = (isOpen: boolean, uuid: string): FlexMessage => {
         contents: [
           {
             type: 'text',
-            text: '鍵を借りる',
+            text: '鍵を返す',
             weight: 'bold',
             size: 'md',
             position: 'relative',
