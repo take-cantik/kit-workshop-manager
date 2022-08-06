@@ -15,7 +15,9 @@ import { msgOutage } from '../../notice-messages/other'
 // import { richMenuInitHandler } from './richMenus/richMenuInit'
 
 export const postbackHandler = async (event: PostbackEvent): Promise<void> => {
-  await lineClient.replyMessage(event.replyToken, msgOutage)
+  if (event.postback.data !== 'richMenuSwitch') {
+    await lineClient.replyMessage(event.replyToken, msgOutage)
+  }
   // const postbackRepository = new PostbackRepository()
   // if (isRichMenu(event)) {
   //   const prefix = getPrefix(event)
